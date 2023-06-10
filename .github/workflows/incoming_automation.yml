@@ -33,7 +33,7 @@ jobs:
         with:
           title: "My pull request title"
           body: "My pull request body"
-          branch: "incoming_automation"
+          branch: ${{ steps.comment-branch.outputs.head_ref }}
           path: "."
           commit-message: "My commit message for uncommitted changes in lib/ folder"
           author: "Brent Wooden <brent.wooden@gmail.com>"
