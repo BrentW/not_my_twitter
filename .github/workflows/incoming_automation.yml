@@ -46,7 +46,7 @@ jobs:
               console.log("fileContent");
               console.log(fileContent);
               
-              if (fileName && filePathLine) {
+              if (filePathLine) {
                 const fullPath = `${filePathLine}`;
                 await github.repos.createOrUpdateFileContents({
                   owner: context.repo.owner,
