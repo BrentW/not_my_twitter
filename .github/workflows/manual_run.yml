@@ -16,7 +16,7 @@ jobs:
         with:
           title: "My pull request title"
           body: "My pull request body"
-          branch: "main"
+          branch: "incoming_automation"
           path: "."
           commit-message: "My commit message for uncommitted changes in lib/ folder"
           author: "Brent Wooden <brent.wooden@gmail.com>"
