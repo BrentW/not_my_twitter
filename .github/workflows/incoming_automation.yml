@@ -25,8 +25,13 @@ jobs:
         with:
           ref: ${{ steps.comment-branch.outputs.head_ref }}
 
-      - run: "date > datetime.txt" # create or update a test.txt file
+      - name: Setup Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
       - name: Make PR
+      - run: "date > datetime.txt" # create or update a test.txt file
         uses: gr2m/create-or-update-pull-request-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -38,12 +43,6 @@ jobs:
           commit-message: "My commit message for uncommitted changes in lib/ folder"
           author: "Brent Wooden <brent.wooden@gmail.com>"
           update-pull-request-title-and-body: false
-
-      - name: Setup Node.js 16
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
       - name: Set latest commit status as ${{ job.status }}
         uses: myrotvorets/set-commit-status-action@master
         if: always()
