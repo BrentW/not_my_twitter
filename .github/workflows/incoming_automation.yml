@@ -34,8 +34,6 @@ jobs:
             const endMarker = "-FILE END-";
             const fileSections = comment.split(startMarker).map(section => section.trim()).filter(item => item !== '');
 
-            const github = context.github; // Assign the github object to a variable
-
             for (let i = 1; i < fileSections.length; i++) {
               console.log('Parsing section')
               const section = fileSections[i];
@@ -50,7 +48,7 @@ jobs:
               
               if (filePathLine) {
                 const fullPath = `${filePathLine}`;
-                await github.repos.createOrUpdateFileContents({
+                await github.rest.repos.createOrUpdateFileContents({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   path: fullPath,
