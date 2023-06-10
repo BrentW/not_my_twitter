@@ -40,7 +40,7 @@ jobs:
               const splitSections = section.split('\n').filter(item => item !== '').map(line => line.trim());
               const filePathLine = splitSections.shift();
               splitSections.pop();
-              const fileContent = splitSection.join('\n');
+              const fileContent = splitSections.join('\n');
               console.log("filePathLine");
               console.log(filePathLine);
               console.log("fileContent");
