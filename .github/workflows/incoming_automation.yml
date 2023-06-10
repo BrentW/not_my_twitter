@@ -32,16 +32,22 @@ jobs:
             const comment = context.payload.comment.body;
             const startMarker = "-FILE START-";
             const endMarker = "-FILE END-";
-            const fileSections = comment.split(startMarker).map(section => section.trim());
+            const fileSections = comment.split(startMarker).map(section => section.trim()).filter(item => item !== '');
 
             for (let i = 1; i < fileSections.length; i++) {
+              console.log('Parsing section')
               const section = fileSections[i];
-              const [filePathLine, fileContent] = section.split('\n', 2).map(line => line.trim());
-              const fileName = filePathLine.split(': ')[1];
-              const filePath = filePathLine.split(': ')[2];
-
+              const splitSections = section.split('\n').filter(item => item !== '').map(line => line.trim());
+              const filePathLine = splitSections.shift();
+              splitSections.pop();
+              const fileContent = splitSection.join('\n');
+              console.log("filePathLine");
+              console.log(filePathLine);
+              console.log("fileContent");
+              console.log(fileContent);
+              
               if (fileName && filePath && fileContent) {
-                const fullPath = `${filePath}/${fileName}`;
+                const fullPath = `${filePathLine}`;
                 await github.repos.createOrUpdateFileContents({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
