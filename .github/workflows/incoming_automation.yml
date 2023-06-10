@@ -7,7 +7,7 @@ on:
 jobs:
   incoming_automation:
     runs-on: ubuntu-latest
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/update')
+    if: github.event.issue.pull_request
     steps:
       - name: Get PR branch
         uses: xt0rted/pull-request-comment-branch@v1
