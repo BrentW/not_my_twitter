@@ -1,4 +1,4 @@
-name: PR UPDATE
+name: manual run
 on:
   workflow_dispatch
   
