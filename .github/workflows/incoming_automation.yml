@@ -24,7 +24,34 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ steps.comment-branch.outputs.head_ref }}
+          
+      - name: Split comment into files
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const comment = context.payload.comment.body;
+            const startMarker = "-FILE START-";
+            const endMarker = "-FILE END-";
+            const fileSections = comment.split(startMarker).map(section => section.trim());
 
+            for (let i = 1; i < fileSections.length; i++) {
+              const section = fileSections[i];
+              const [filePathLine, fileContent] = section.split('\n', 2).map(line => line.trim());
+              const fileName = filePathLine.split(': ')[1];
+              const filePath = filePathLine.split(': ')[2];
+
+              if (fileName && filePath && fileContent) {
+                const fullPath = `${filePath}/${fileName}`;
+                await github.repos.createOrUpdateFileContents({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  path: fullPath,
+                  message: `Create ${fullPath}`,
+                  content: Buffer.from(fileContent).toString('base64'),
+                  branch: context.payload.repository.default_branch
+                });
+              }
+            }
       - run: "date > datetime.txt" # create or update a test.txt file
       - name: Make PR
         uses: gr2m/create-or-update-pull-request-action@v1
