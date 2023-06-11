@@ -54,7 +54,7 @@ jobs:
                   path: fullPath,
                   message: `Create ${fullPath}`,
                   content: Buffer.from(fileContent).toString('base64'),
-                  branch: context.payload.repository.default_branch
+                  branch: '${{ steps.comment-branch.outputs.head_ref }}'
                 });
               }
             }
