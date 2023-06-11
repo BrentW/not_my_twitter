@@ -1,0 +1,19 @@
+<h2><%= @user.name %></h2>
+<h3>Tweets</h3>
+<ul>
+<% @tweets.each do |tweet| %>
+<li><%= tweet.content %></li>
+<% end %>
+</ul>
+<h3>Followers</h3>
+<ul>
+<% @followers.each do |follower| %>
+<li><%= follower.name %></li>
+<% end %>
+</ul>
+<h3>Following</h3>
+<ul>
+<% @following.each do |followed_user| %>
+<li><%= followed_user.name %></li>
+<% end %>
+</ul>
