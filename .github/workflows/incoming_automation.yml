@@ -58,19 +58,6 @@ jobs:
                 });
               }
             }
-      - run: "date > datetime.txt" # create or update a test.txt file
-      - name: Make PR
-        uses: gr2m/create-or-update-pull-request-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          title: "My pull request title"
-          body: "My pull request body"
-          branch: ${{ steps.comment-branch.outputs.head_ref }}
-          path: "."
-          commit-message: "My commit message for uncommitted changes in lib/ folder"
-          author: "Brent Wooden <brent.wooden@gmail.com>"
-          update-pull-request-title-and-body: false
 
       - name: Setup Node.js 16
         uses: actions/setup-node@v3
