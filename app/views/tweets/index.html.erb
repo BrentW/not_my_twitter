@@ -1,0 +1,8 @@
+<h1>Tweets</h1>
+<%= link_to "New Tweet", new_tweet_path %>
+<% @tweets.each do |tweet| %>
+<div class="tweet">
+<p><%= tweet.content %></p>
+<span><%= tweet.user.username %> | <%= tweet.created_at.strftime("%m/%d/%Y %I:%M %p") %></span>
+</div>
+<% end %>
