@@ -34,7 +34,7 @@ jobs:
             const endMarker = "-FILE END-";
             const fileSections = comment.split(startMarker).map(section => section.trim()).filter(item => item !== '');
 
-            for (let i = 1; i < fileSections.length; i++) {
+            for (let i = 0; i < fileSections.length; i++) {
               console.log('Parsing section')
               const section = fileSections[i];
               const splitSections = section.split('\n').filter(item => item !== '').map(line => line.trim());
